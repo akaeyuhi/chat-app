@@ -1,0 +1,17 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/platform-socket.io": "^10.2.8",
+    "@nestjs/websockets": "^10.2.8",
+    "react-router-dom": "^6.18.0",
+    "socket.io-client": "^4.7.2"
+  }
+}
