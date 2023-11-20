@@ -1,7 +1,7 @@
-import styles from './styles.module.css';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChatContext } from '../../App';
+import styles from './styles.module.css';
+import { ChatContext } from '../../utils/chatContext';
 
 interface User {
   username: string,
@@ -13,21 +13,21 @@ interface ServerResponse {
   date: Date
 }
 
-const RoomAndUsers = () => {
-  const chat = useContext(ChatContext);
+function RoomAndUsers() {
+  const chat = useContext(ChatContext)!;
   const [roomUsers, setRoomUsers] = useState<User[]>([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    chat?.subscribe('chatUsers', (data: ServerResponse) => {
+    chat.subscribe('chatUsers', (data: ServerResponse) => {
       setRoomUsers(data.chatUsers);
     });
     return () => chat?.unsubscribe('chatUsers');
   }, [chat]);
 
   const leaveRoom = () => {
-    chat?.disconnect();
+    chat.disconnect();
     navigate('/', { replace: true });
   };
 
@@ -37,7 +37,7 @@ const RoomAndUsers = () => {
       <div>
         {roomUsers.length > 0 && <h5 className={styles.usersTitle}>Users:</h5>}
         <ul className={styles.usersList}>
-          {roomUsers.map((user) => (
+          {roomUsers.map(user => (
             <li
               style={{
                 fontWeight: `${user.username === chat?.username ? 'bold' : 'normal'}`,
@@ -50,11 +50,11 @@ const RoomAndUsers = () => {
         </ul>
       </div>
 
-      <button className='btn btn-outline' onClick={leaveRoom}>
+      <button type="button" className="btn btn-outline" onClick={leaveRoom}>
         Leave
       </button>
     </div>
   );
-};
+}
 
 export default RoomAndUsers;

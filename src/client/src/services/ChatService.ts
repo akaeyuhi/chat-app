@@ -2,8 +2,11 @@ import { connect, Socket } from 'socket.io-client';
 
 export default class ChatService {
   connectionLink: string;
+
   private socket: Socket | null = null;
+
   username: string;
+
   isConnected = false;
 
   constructor(link: string, username = '') {
@@ -58,7 +61,7 @@ export default class ChatService {
       this.socket?.emit('sendMessage', {
         username: this.username,
         message,
-        date
+        date,
       });
     }
   }

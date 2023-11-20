@@ -1,25 +1,25 @@
+import React, { useMemo } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import { createContext } from 'react';
 import ChatService from './services/ChatService';
 import Chat from './pages/Chat';
-
-export const ChatContext = createContext<ChatService | null>(null);
+import { ChatContext } from './utils/chatContext';
 
 function App() {
-  const chat = new ChatService('http://localhost:4000');
+  const chat = useMemo(() => new ChatService('http://localhost:4000'), []);
 
   return (
     <Router>
-      <div className='App'>
+      <div className="App">
         <ChatContext.Provider value={chat}>
           <Routes>
             <Route
-              path='/'
-              element={<Home />} />
+              path="/"
+              element={<Home />}
+            />
             <Route
-              path='/chat'
+              path="/chat"
               element={<Chat />}
             />
           </Routes>

@@ -1,9 +1,9 @@
-import styles from './styles.module.css';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChatContext } from '../../App';
+import styles from './styles.module.css';
+import { ChatContext } from '../../utils/chatContext';
 
-const Home = () => {
+function Home() {
   const [username, setUsername] = useState('');
   const chat = useContext(ChatContext)!;
   const navigate = useNavigate();
@@ -18,18 +18,24 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <h1>{`Chat`}</h1>
+        <h1>Chat</h1>
         <input
           value={username}
           className={styles.input}
-          placeholder='Username...'
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username..."
+          onChange={e => setUsername(e.target.value)}
         />
-        <button className='btn btn-secondary' style={{ width: '100%' }} onClick={joinChat}>Join
+        <button
+          type="button"
+          className="btn btn-secondary"
+          style={{ width: '100%' }}
+          onClick={joinChat}
+        >
+          Join
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default Home;

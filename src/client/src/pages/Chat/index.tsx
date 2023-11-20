@@ -1,10 +1,10 @@
+import React from 'react';
 import styles from './styles.module.css';
 import Messages from './Messages';
-import React from 'react';
 import SendMessage from './SendMessage';
 import RoomAndUsers from './RoomAndUsers';
 
-const Chat = () => {
+function Chat() {
   return (
     <div className={styles.chatContainer}>
       <RoomAndUsers />
@@ -14,6 +14,6 @@ const Chat = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Chat;
